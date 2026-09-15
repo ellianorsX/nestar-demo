@@ -1,18 +1,13 @@
 import withLayoutBasic from "@/libs/components/layout/LayoutBasic";
+import { Stack } from "@mui/material";
 import { NextPage } from "next";
 import { useState } from "react";
 
 const Community: NextPage = () => {
   const [title, setTitle] = useState<string>("Hello");
   return (
-    <div>
-      COMMUNITY{" "}
-      <button
-        onClick={() => alert("Hello: Agent-Ellianor")}
-        style={{ margin: "15px" }}
-      >
-        Press Me
-      </button>
+    <div style={{ margin: "20px 0" }}>
+      <Stack className="container">Community</Stack>
     </div>
   );
 };
