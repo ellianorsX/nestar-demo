@@ -1,25 +1,63 @@
 import { Stack } from "@mui/material";
 import Head from "next/head";
+import Top from "../Top";
+import Footer from "../Footer";
+import useDeviceDetect from "../../hooks/useDeviceDetect";
+import HeaderFilter from "../homepage/HeaderFilter";
 
 const withLayoutMain = (Component: any) => {
   return (props: any) => {
-    return (
-      <>
-        <Head>
-          <title>Nestar</title>
-        </Head>
+    const device = useDeviceDetect();
 
-        <Stack id="pc-wrap">
-          <Stack sx={{ background: "#81c784" }}>Header Home</Stack>
+    if (device == "mobile") {
+      return (
+        <>
+          <Head>
+            <title>Nestar</title>
+          </Head>
+          <Stack id="mobile-wrap">
+            <Stack id={"top"}>
+              <Top />
+            </Stack>
 
-          <Stack id={"main"}>
-            <Component {...props} />
+            <Stack id={"main"}>
+              <Component {...props} />
+            </Stack>
+
+            <Stack id={"footer"}>
+              <Footer />
+            </Stack>
           </Stack>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Head>
+            <title>Nestar</title>
+          </Head>
+          <Stack id="pc-wrap">
+            <Stack id={"top"}>
+              <Top />
+            </Stack>
+            <Stack className={"header-main"}>
+              <Stack className={"container"}>
+                <HeaderFilter />
+              </Stack>
+            </Stack>
 
-          <Stack sx={{ background: "#a1887f" }}>Footer</Stack>
-        </Stack>
-      </>
-    );
+            <Stack id={"main"}>
+              <Component {...props} />
+            </Stack>
+
+            <Stack id={"footer"}>
+              <Footer />
+            </Stack>
+          </Stack>
+        </>
+      );
+    }
   };
 };
+
 export default withLayoutMain;
